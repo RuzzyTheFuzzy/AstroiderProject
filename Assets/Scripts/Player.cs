@@ -8,6 +8,8 @@ public class Player : MonoBehaviour
 
     [SerializeField] private float speed;
     [SerializeField] private Rigidbody2D rb;
+    [SerializeField] private float shootDelay;
+    [SerializeField] private GameObject bulletPrefab;
     private Vector2 _cashedMovement;
 
     // Update is called once per frame
@@ -29,6 +31,13 @@ public class Player : MonoBehaviour
         if ( Input.GetKey( "d" ) )
         {
             _cashedMovement.x += mod * speed;
+        }
+        if ( Input.GetKeyDown( "space") )
+        {
+            for ( int i = 0; i < 5000; i++ )
+            {
+                Instantiate( bulletPrefab, transform.position, Quaternion.identity );
+            }
         }
     }
 
