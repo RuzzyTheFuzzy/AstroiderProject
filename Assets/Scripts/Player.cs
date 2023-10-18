@@ -10,40 +10,40 @@ public class Player : MonoBehaviour
     [SerializeField] private Rigidbody2D rb;
     [SerializeField] private float shootDelay;
     [SerializeField] private GameObject bulletPrefab;
-    private Vector2 _cashedMovement;
+    
+    private Vector2 cashedMovement;
+    private float timer;
+    private bool shooting;
 
     // Update is called once per frame
     void Update()
     {
-        var mod = Time.deltaTime;
-        if ( Input.GetKey( "w") )
-        {
-            _cashedMovement.y += mod * speed;
-        }
-        if ( Input.GetKey( "s" ) )
-        {
-            _cashedMovement.y += -mod * speed;
-        }
         if ( Input.GetKey( "a" ) )
         {
-            _cashedMovement.x += -mod * speed;
+            cashedMovement.x = -speed;
         }
         if ( Input.GetKey( "d" ) )
         {
-            _cashedMovement.x += mod * speed;
+            cashedMovement.x = speed;
         }
-        if ( Input.GetKeyDown( "space") )
+
+        if (!shooting) // else we need to press it exactly before fixed update
+            shooting = Input.GetKeyDown( "space" );
+    }
+
+    private void FixedUpdate( )
+    {
+        rb.velocity = cashedMovement;
+        cashedMovement = Vector2.zero;
+
+        if ( shooting )
         {
             for ( int i = 0; i < 5000; i++ )
             {
                 Instantiate( bulletPrefab, transform.position, Quaternion.identity );
             }
-        }
-    }
 
-    private void FixedUpdate( )
-    {
-        rb.AddForce(_cashedMovement);
-        _cashedMovement = Vector2.zero;
+            shooting = false;
+        }
     }
 }
