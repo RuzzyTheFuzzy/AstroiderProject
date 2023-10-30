@@ -38,12 +38,17 @@ public class Player : MonoBehaviour
 
         if ( shooting )
         {
-            for ( int i = 0; i < 5000; i++ )
-            {
+            // for ( int i = 0; i < 5000; i++ ) // For the 5000 bullets test
+            // {
                 Instantiate( bulletPrefab, transform.position, Quaternion.identity );
-            }
+            // }
 
             shooting = false;
         }
+    }
+
+    private void OnTriggerEnter2D( Collider2D col )
+    {
+        Debug.Log("You Died :(");
     }
 }

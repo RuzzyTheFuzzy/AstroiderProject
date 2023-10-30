@@ -1,9 +1,4 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.UIElements;
 
 public class Bullet : MonoBehaviour
 {
@@ -16,7 +11,11 @@ public class Bullet : MonoBehaviour
     }
 
     private void OnTriggerEnter2D( Collider2D col )
-    {
+    {                              // ==8 hehe
+        if ( col.gameObject.layer == 8 )
+        {
+            Destroy(col.gameObject);
+        }
         Destroy(gameObject);
     }
 }
