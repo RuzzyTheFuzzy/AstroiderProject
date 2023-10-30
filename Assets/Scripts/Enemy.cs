@@ -18,11 +18,14 @@ public class Enemy : MonoBehaviour
 
     private void OnTriggerEnter2D( Collider2D col )
     {
-        if ( !isHit )
+        if ( col.gameObject.layer != 6 ) // Dont count player enemy collisions
         {
-            EnemyController.Singelton.RemoveEnemy();
-            isHit = true;
-            gameObject.SetActive(false);
+            if ( !isHit )
+            {
+                EnemyController.Singelton.RemoveEnemy();
+                isHit = true;
+                gameObject.SetActive(false);
+            }
         }
     }
 }
