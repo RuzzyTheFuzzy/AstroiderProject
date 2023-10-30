@@ -135,7 +135,6 @@ GameObject:
   - component: {fileID: 234851827}
   - component: {fileID: 234851826}
   - component: {fileID: 234851825}
-  - component: {fileID: 234851829}
   m_Layer: 7
   m_Name: Barrier (1)
   m_TagString: Untagged
@@ -282,18 +281,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &234851829
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 234851824}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8202cae61c9ada8418fdbf1b5bac7119, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &238972734
 GameObject:
   m_ObjectHideFlags: 0
@@ -700,7 +687,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8633db88d5b37fd429400f5c41f8928f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxEnemies: 1
+  maxEnemies: 5000
   enemyPrefab: {fileID: 8741194293023959252, guid: 033cdfde9fc2b384fa6037281b6b80b3, type: 3}
   minSpawnX: -9.25
   maxSpawnX: 9.25

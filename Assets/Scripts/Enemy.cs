@@ -9,18 +9,20 @@ public class Enemy : MonoBehaviour
     [SerializeField] private float speed;
 
     private bool isHit;
-
-    void Start()
+    
+    private void OnEnable( )
     {
+        isHit = false;
         rb.velocity = Vector2.down * speed;
     }
 
-    private void OnDestroy( )
+    private void OnTriggerEnter2D( Collider2D col )
     {
         if ( !isHit )
         {
             EnemyController.Singelton.RemoveEnemy();
             isHit = true;
+            gameObject.SetActive(false);
         }
     }
 }
