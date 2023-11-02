@@ -8,24 +8,21 @@ public class Enemy : MonoBehaviour
     [SerializeField] private Rigidbody2D rb;
     [SerializeField] private float speed;
 
-    private bool isHit;
-    
+    public bool IsHit { get; private set; }
+
     private void OnEnable( )
     {
-        isHit = false;
+        IsHit = false;
         rb.velocity = Vector2.down * speed;
     }
-
-    private void OnTriggerEnter2D( Collider2D col )
+    
+    public void BulletHit()
     {
-        if ( col.gameObject.layer != 6 ) // Dont count player enemy collisions
+        if ( !IsHit )
         {
-            if ( !isHit )
-            {
-                EnemyController.Singelton.RemoveEnemy();
-                isHit = true;
-                gameObject.SetActive(false);
-            }
+            EnemyController.Singelton.RemoveEnemy();
+            IsHit = true;
+            gameObject.SetActive( false );
         }
     }
 }

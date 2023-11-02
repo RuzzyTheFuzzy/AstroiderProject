@@ -46,9 +46,4 @@ public class Player : MonoBehaviour
             shooting = false;
         }
     }
-
-    private void OnTriggerEnter2D( Collider2D col )
-    {
-        Debug.Log("You Died :(");
-    }
 }

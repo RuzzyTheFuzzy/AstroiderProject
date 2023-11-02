@@ -162,4 +162,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rb: {fileID: 2766078834718413078}
+  col2D: {fileID: 426828654789383641}
   speed: 10
+  hitDistance: 0.5

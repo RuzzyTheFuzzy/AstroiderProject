@@ -12,9 +12,12 @@ public class EnemyController : MonoBehaviour
     [SerializeField] private GameObject enemyPrefab;
     [SerializeField] private float minSpawnX;
     [SerializeField] private float maxSpawnX;
+    [SerializeField] private float timeUntillRespawn; // Using timer as distance checking is slow
+
+    private float respawnTimer;
 
     private int currentEnemyAmount;
-    private List<GameObject> enemyPool;
+    public List<GameObject> EnemyPool { get; private set; }
 
     private void Start( )
     {
@@ -27,12 +30,20 @@ public class EnemyController : MonoBehaviour
             Singelton = this;
         }
 
-        enemyPool = new List<GameObject>();
+        EnemyPool = new List<GameObject>();
 
     }
 
     void Update( )
     {
+        respawnTimer += Time.deltaTime;
+
+        if ( respawnTimer >= timeUntillRespawn )
+        {
+            currentEnemyAmount = 0;
+            respawnTimer = 0;
+        }
+        
         if ( currentEnemyAmount <= 0 )
         {
             maxEnemies++;
@@ -44,15 +55,15 @@ public class EnemyController : MonoBehaviour
                 var enemyPos = spawnPos;
                 enemyPos.x = Random.Range( minSpawnX, maxSpawnX );
 
-                if ( enemyPool.Count > i )
+                if ( EnemyPool.Count > i )
                 {
-                    var enemy = enemyPool[i];
+                    var enemy = EnemyPool[i];
                     enemy.SetActive( true );
                     enemy.transform.position = enemyPos;
                 }
                 else
                 {
-                    enemyPool.Add( Instantiate( enemyPrefab, enemyPos, Quaternion.identity ) );
+                    EnemyPool.Add( Instantiate( enemyPrefab, enemyPos, Quaternion.identity ) );
                 }
 
                 currentEnemyAmount++;
