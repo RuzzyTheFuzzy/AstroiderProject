@@ -38,11 +38,9 @@ public class Player : MonoBehaviour
 
         if ( shooting )
         {
-            // for ( int i = 0; i < 5000; i++ ) // For the 5000 bullets test
-            // {
-                Instantiate( bulletPrefab, transform.position, Quaternion.identity );
-            // }
 
+            Instantiate( bulletPrefab, transform.position, Quaternion.identity );
+            
             shooting = false;
         }
     }

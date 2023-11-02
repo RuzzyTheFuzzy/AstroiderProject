@@ -126,5 +126,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rb: {fileID: 653441337492300431}
-  speed: 3
-  deathHeight: -6
+  speed: 2

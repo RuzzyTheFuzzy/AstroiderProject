@@ -1,25 +1,48 @@
 using System;
+using Unity.Mathematics;
 using UnityEngine;
 
 public class Bullet : MonoBehaviour
 {
     [SerializeField] private Rigidbody2D rb;
-    [SerializeField] private Collider2D col2D;
     [SerializeField] private float speed;
-    [SerializeField] private float hitDistance;
+    [SerializeField] private float hitDistance; // Half radius of bullet and enemy combined
 
     void Start()
     {
         rb.velocity = Vector2.up * speed;
     }
 
+    private void Update( )
+    {
+        if ( transform.position.y > 10 )
+        {
+            Destroy(gameObject);
+        }
+    }
+
     private void FixedUpdate( )
     {
         foreach ( var enemy in EnemyController.Singelton.EnemyPool )
         {
-            var closestPoint = col2D.ClosestPoint( enemy.transform.position );
-
-            if ( Vector2.Distance( closestPoint, enemy.transform.position ) < hitDistance )
+            var enemyPos = enemy.transform.position;
+            var bulletPos = transform.position;
+            
+            // Ignore the enemies if the wave cant be within range of the bullets
+            if ( math.abs( enemyPos.y - bulletPos.y ) > hitDistance ) 
+            {
+                var enemyComp = enemy.GetComponent<Enemy>();
+                
+                if ( enemyComp )
+                {
+                    if ( !enemyComp.IsHit )
+                    {
+                        break;
+                    }
+                }
+            }
+            
+            if ( Vector2.Distance( bulletPos, enemyPos ) < hitDistance )
             {
                 var enemyComp = enemy.GetComponent<Enemy>();
 
@@ -33,13 +56,4 @@ public class Bullet : MonoBehaviour
             }
         }
     }
-
-    private void OnTriggerEnter2D( Collider2D col )
-    {
-        Destroy(gameObject);
-    }
-    
-    
-    
-    
 }

@@ -46,6 +46,7 @@ public class EnemyController : MonoBehaviour
         
         if ( currentEnemyAmount <= 0 )
         {
+            respawnTimer = 0;
             maxEnemies++;
             var spawnAmount = maxEnemies - currentEnemyAmount;
             var spawnPos = transform.position;
