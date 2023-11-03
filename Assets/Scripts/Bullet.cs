@@ -29,7 +29,7 @@ public class Bullet : MonoBehaviour
             var bulletPos = transform.position;
             
             // Ignore the enemies if the wave cant be within range of the bullets
-            if ( math.abs( enemyPos.y - bulletPos.y ) > hitDistance ) 
+            if ( math.abs( enemyPos.y - bulletPos.y ) > hitDistance )
             {
                 var enemyComp = enemy.GetComponent<Enemy>();
                 
