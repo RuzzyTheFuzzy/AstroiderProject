@@ -665,7 +665,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8633db88d5b37fd429400f5c41f8928f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxEnemies: 25000
+  maxEnemies: 0
   enemyPrefab: {fileID: 8741194293023959252, guid: 033cdfde9fc2b384fa6037281b6b80b3, type: 3}
   minSpawnX: -8.4
   maxSpawnX: 8.4
@@ -1297,7 +1297,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 839002367d121b140879184726256cf4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  canvas: {fileID: 1640836542}
 --- !u!1 &1667571600
 GameObject:
   m_ObjectHideFlags: 0
