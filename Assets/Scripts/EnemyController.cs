@@ -14,6 +14,8 @@ public class EnemyController : MonoBehaviour
     [SerializeField] private float maxSpawnX;
     [SerializeField] private float timeUntillRespawn; // Using timer as distance checking is slow
 
+    public bool started;
+
     private float respawnTimer;
 
     private int currentEnemyAmount;
@@ -31,43 +33,45 @@ public class EnemyController : MonoBehaviour
         }
 
         EnemyPool = new List<GameObject>();
-
     }
 
     void Update( )
     {
-        respawnTimer += Time.deltaTime;
-
-        if ( respawnTimer >= timeUntillRespawn )
+        if ( started )
         {
-            currentEnemyAmount = 0;
-            respawnTimer = 0;
-        }
-        
-        if ( currentEnemyAmount <= 0 )
-        {
-            respawnTimer = 0;
-            maxEnemies++;
-            var spawnAmount = maxEnemies - currentEnemyAmount;
-            var spawnPos = transform.position;
+            respawnTimer += Time.deltaTime;
 
-            for ( int i = 0; i < spawnAmount; i++ )
+            if ( respawnTimer >= timeUntillRespawn )
             {
-                var enemyPos = spawnPos;
-                enemyPos.x = Random.Range( minSpawnX, maxSpawnX );
+                currentEnemyAmount = 0;
+                respawnTimer = 0;
+            }
 
-                if ( EnemyPool.Count > i )
-                {
-                    var enemy = EnemyPool[i];
-                    enemy.SetActive( true );
-                    enemy.transform.position = enemyPos;
-                }
-                else
-                {
-                    EnemyPool.Add( Instantiate( enemyPrefab, enemyPos, Quaternion.identity ) );
-                }
+            if ( currentEnemyAmount <= 0 )
+            {
+                respawnTimer = 0;
+                maxEnemies++;
+                var spawnAmount = maxEnemies - currentEnemyAmount;
+                var spawnPos = transform.position;
 
-                currentEnemyAmount++;
+                for ( int i = 0; i < spawnAmount; i++ )
+                {
+                    var enemyPos = spawnPos;
+                    enemyPos.x = Random.Range( minSpawnX, maxSpawnX );
+
+                    if ( EnemyPool.Count > i )
+                    {
+                        var enemy = EnemyPool[i];
+                        enemy.SetActive( true );
+                        enemy.transform.position = enemyPos;
+                    }
+                    else
+                    {
+                        EnemyPool.Add( Instantiate( enemyPrefab, enemyPos, Quaternion.identity ) );
+                    }
+
+                    currentEnemyAmount++;
+                }
             }
         }
     }
